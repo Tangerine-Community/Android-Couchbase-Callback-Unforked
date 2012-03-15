@@ -35,15 +35,10 @@ public class AndroidCouchbaseCallback extends DroidGap
 {
     public static final String TAG = AndroidCouchbaseCallback.class.getName();
     public static final String COUCHBASE_DATABASE_SUFFIX = ".couch";
-    public static final String WELCOME_DATABASE = "welcome";
     public static final String DEFAULT_ATTACHMENT = "/index.html";
     private CouchbaseMobile couchbaseMobile;
     private ServiceConnection couchbaseService;
     private String couchappDatabase;
-
-    protected boolean installWelcomeDatabase() {
-        return true;
-    }
 
     protected boolean showSplashScreen() {
         return true;
@@ -69,10 +64,6 @@ public class AndroidCouchbaseCallback extends DroidGap
         return "http://" + host + ":" + port + "/" + getDatabaseName() + "/_design/" + getDesignDocName() + getAttachmentPath();
     }
 
-    protected String getWelcomeAppURL(String host, int port) {
-        return "http://" + host + ":" + port + "/" + WELCOME_DATABASE + "/_design/" + WELCOME_DATABASE + DEFAULT_ATTACHMENT;
-    }
-
     protected void couchbaseStarted(String host, int port) {
 
     }
@@ -82,7 +73,8 @@ public class AndroidCouchbaseCallback extends DroidGap
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-/*
+
+        /*
         if(showSplashScreen()) {
             // show the splash screen
             // NOTE: Callback won't show the splash until we try to load a URL
@@ -90,18 +82,17 @@ public class AndroidCouchbaseCallback extends DroidGap
             setIntegerProperty("splashscreen", getSplashScreenDrawable());
             loadUrl("file:///android_asset/www/error.html", 120000);
         }
-*/
+        */
+        
         // increase the default timeout
         super.setIntegerProperty("loadUrlTimeoutValue", 60000);
 
         couchbaseMobile = new CouchbaseMobile(getBaseContext(), couchCallbackHandler);
-        try {
-            if(installWelcomeDatabase()) {
-                couchbaseMobile.installDatabase(WELCOME_DATABASE + COUCHBASE_DATABASE_SUFFIX);
-            }
 
+        try {
             // look for a .couch file in the assets folder
             couchappDatabase = getDatabaseName();
+
             if(couchappDatabase != null) {
                 // if we found one, install it
                 couchbaseMobile.installDatabase(couchappDatabase + COUCHBASE_DATABASE_SUFFIX);
@@ -132,7 +123,7 @@ public class AndroidCouchbaseCallback extends DroidGap
         }
         if(assets != null) {
             for (String asset : assets) {
-                if(!asset.startsWith(WELCOME_DATABASE) && asset.endsWith(COUCHBASE_DATABASE_SUFFIX)) {
+                if(asset.endsWith(COUCHBASE_DATABASE_SUFFIX)) {
                     result = asset.substring(0, asset.length() - COUCHBASE_DATABASE_SUFFIX.length());
                     break;
                 }
@@ -168,9 +159,6 @@ public class AndroidCouchbaseCallback extends DroidGap
             }
             if(couchappDatabase != null) {
                 AndroidCouchbaseCallback.this.loadUrl(getCouchAppURL(host, port));
-            }
-            else {
-                AndroidCouchbaseCallback.this.loadUrl(getWelcomeAppURL(host, port));
             }
 
             AndroidCouchbaseCallback.this.couchbaseStarted(host, port);
