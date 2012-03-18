@@ -40,14 +40,6 @@ public class AndroidCouchbaseCallback extends DroidGap
     private ServiceConnection couchbaseService;
     private String couchappDatabase;
 
-    protected boolean showSplashScreen() {
-        return true;
-    }
-
-    protected int getSplashScreenDrawable() {
-        return R.drawable.splash;
-    }
-
     protected String getDatabaseName() {
         return findCouchApp();
     }
@@ -74,15 +66,12 @@ public class AndroidCouchbaseCallback extends DroidGap
     {
         super.onCreate(savedInstanceState);
 
-        /*
-        if(showSplashScreen()) {
-            // show the splash screen
-            // NOTE: Callback won't show the splash until we try to load a URL
-            //       so we start a load, with a wait time we should never exceed
-            setIntegerProperty("splashscreen", getSplashScreenDrawable());
-            loadUrl("file:///android_asset/www/error.html", 120000);
-        }
-        */
+        // show the splash screen
+        // NOTE: Callback won't show the splash until we try to load a URL
+        //       so we start a load, with a wait time we should never exceed
+        setIntegerProperty("splashscreen", R.drawable.splash);
+        loadUrl("file:///android_asset/www/error.html", 120000);
+        
         
         // increase the default timeout
         super.setIntegerProperty("loadUrlTimeoutValue", 60000);
@@ -153,10 +142,10 @@ public class AndroidCouchbaseCallback extends DroidGap
          */
         @Override
         public void couchbaseStarted(String host, int port) {
-            if(showSplashScreen()) {
-                //stop the load that we started to display the splash screen
-                cancelLoadUrl();
-            }
+
+            //stop the load that we started to display the splash screen
+            cancelLoadUrl();
+
             if(couchappDatabase != null) {
                 AndroidCouchbaseCallback.this.loadUrl(getCouchAppURL(host, port));
             }
