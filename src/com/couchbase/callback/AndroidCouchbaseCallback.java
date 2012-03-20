@@ -69,14 +69,13 @@ public class AndroidCouchbaseCallback extends DroidGap
         // show the splash screen
         // NOTE: Callback won't show the splash until we try to load a URL
         //       so we start a load, with a wait time we should never exceed
-        setIntegerProperty("splashscreen", R.drawable.splash);
-        loadUrl("file:///android_asset/www/error.html", 120000);
-        
-        
-        // increase the default timeout
-        super.setIntegerProperty("loadUrlTimeoutValue", 60000);
+        // setIntegerProperty("splashscreen", R.drawable.splash);
+        loadUrl( "file:///android_asset/www/error.html", 120000 );
 
-        couchbaseMobile = new CouchbaseMobile(getBaseContext(), couchCallbackHandler);
+        // increase the default timeout
+        super.setIntegerProperty( "loadUrlTimeoutValue", 60000 );
+
+        couchbaseMobile = new CouchbaseMobile( getBaseContext(), couchCallbackHandler );
 
         try {
             // look for a .couch file in the assets folder
