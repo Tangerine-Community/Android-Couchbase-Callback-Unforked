@@ -24,5 +24,5 @@ echo
 echo "**********"
 echo "Installing"
 echo "**********"
-adb install /Users/fet/Sites/Tangerine/Android-Couchbase-Callback/bin/Tangerine-debug.apk
+adb install bin/Tangerine-debug.apk
 #adb shell am start -n com.couchbase.callback/.AndroidCouchbaseCallback
