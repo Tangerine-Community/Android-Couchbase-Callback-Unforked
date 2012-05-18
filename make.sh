@@ -7,7 +7,7 @@ mkdir $HOME/$BACKUP
 fi
 
 # Clean out the tangerine DB of any existing assessments or results
-curl -H "Content-Type: application/json" -X DELETE http://mvm:mvm@localhost:5984/tangerine; curl -H "Content-Type: application/json" -X PUT http://mvm:mvm@localhost:5984/tangerine; cd /var/www/Tangerine/app; couchapp push; cd -
+curl -H "Content-Type: application/json" -X DELETE http://tangerine:tangytangerine@localhost:5984/tangerine; curl -H "Content-Type: application/json" -X PUT http://tangerine:tangytangerine@localhost:5984/tangerine; cd ../app; couchapp push; cd -
 
 
 echo
@@ -45,6 +45,7 @@ echo "**********"
 NOW=$(date +"%Y%m%d-%H")
 FILE="Tangerine-debug.$NOW.tar.gz"
 tar czfv $FILE bin/Tangerine-debug.apk
+cp bin/Tangerine-debug.apk bin/Tangerine-$NOW.apk
 cp -f $FILE $HOME/$BACKUP 
 rm $FILE
 #adb shell am start -n com.couchbase.callback/.AndroidCouchbaseCallback
