@@ -6,6 +6,9 @@ if [ ! -d "$BACKUP" ]; then
 mkdir $HOME/$BACKUP
 fi
 
+# Clean out the tangerine DB of any existing assessments or results
+curl -H "Content-Type: application/json" -X DELETE http://mvm:mvm@localhost:5984/tangerine; curl -H "Content-Type: application/json" -X PUT http://mvm:mvm@localhost:5984/tangerine; cd /var/www/Tangerine/app; couchapp push; cd -
+
 
 echo
 echo "********"
