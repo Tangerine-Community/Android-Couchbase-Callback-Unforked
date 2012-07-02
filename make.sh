@@ -26,6 +26,8 @@ echo "********"
 echo "Building"
 echo "********"
 ant debug
+NOW=$(date +"%Y%m%d-%H")
+cp bin/Tangerine-debug.apk bin/Tangerine-$NOW.apk
 echo 
 echo "************"
 echo "Uninstalling"
@@ -42,10 +44,8 @@ echo "Backing up to $HOME/$BACKUP"
 echo "**********"
 
 
-NOW=$(date +"%Y%m%d-%H")
 FILE="Tangerine-debug.$NOW.tar.gz"
 tar czfv $FILE bin/Tangerine-debug.apk
-cp bin/Tangerine-debug.apk bin/Tangerine-$NOW.apk
 cp -f $FILE $HOME/$BACKUP 
 rm $FILE
 #adb shell am start -n com.couchbase.callback/.AndroidCouchbaseCallback
