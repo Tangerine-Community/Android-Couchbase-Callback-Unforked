@@ -17,7 +17,7 @@ echo -e "\n********"
 echo      "Deleting local database"
 echo      "********"
 
-curl -H "Content-Type: application/json" -X DELETE http://tangerine:tangytangerine@localhost:5984/class; curl -H "Content-Type: application/json" -X PUT http://tangerine:tangytangerine@localhost:5984/class; cd ../app; 
+curl -H "Content-Type: application/json" -X DELETE http://tangerine:tangytangerine@localhost:5984/tangerine; curl -H "Content-Type: application/json" -X PUT http://tangerine:tangytangerine@localhost:5984/tangerine; cd ../app; 
 
 echo -e "\n*********************"
 echo      "Pushing with CouchApp"
@@ -36,13 +36,13 @@ ant clean
 echo -e "\n********"
 echo      "Compacting database"
 echo      "********"
-curl -X POST -H "Content-Type: application/json" http://tangerine:tangytangerine@localhost:5984/class/_compact
+curl -X POST -H "Content-Type: application/json" http://tangerine:tangytangerine@localhost:5984/tangerine/_compact
 echo -e "\n********"
 echo      "Building"
 echo      "********"
 ant debug
 NOW=$(date +"%Y%m%d-%H")
-cp bin/Tangerine-debug.apk bin/TangerineClass-$NOW.apk
+cp bin/Tangerine-debug.apk bin/Tangerine-$NOW.apk
 echo -e "\n************"
 echo      "Uninstalling"
 echo      "************"
@@ -56,7 +56,7 @@ echo      "Backing up to $HOME/$BACKUP"
 echo      "**********"
 
 
-FILE="TangerineClass-debug.$NOW.tar.gz"
+FILE="Tangerine-$NOW.tar.gz"
 tar czfv $FILE bin/Tangerine-debug.apk
 cp -f $FILE $HOME/$BACKUP 
 rm $FILE
