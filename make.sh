@@ -42,7 +42,7 @@ echo      "Building"
 echo      "********"
 ant debug
 NOW=$(date +"%Y%m%d-%H")
-cp bin/Tangerine-debug.apk bin/Tangerine-$NOW.apk
+cp bin/Tangerine-debug.apk bin/Tangerine-$NOW-`git log --pretty=format:'%h' -n 1`.apk
 echo -e "\n************"
 echo      "Uninstalling"
 echo      "************"
