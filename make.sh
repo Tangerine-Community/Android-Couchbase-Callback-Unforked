@@ -46,7 +46,7 @@ cp bin/Tangerine-debug.apk bin/Tangerine-$NOW-`git log --pretty=format:'%h' -n 1
 echo -e "\n************"
 echo      "Uninstalling"
 echo      "************"
-adb uninstall com.couchbase.callback
+adb uninstall org.rti.tangerine
 echo -e "\n**********"
 echo      "Installing"
 echo      "**********"
