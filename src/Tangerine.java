@@ -31,9 +31,9 @@ import com.phonegap.DroidGap;
  * make suggestions here:  https://groups.google.com/forum/#!forum/mobile-couchbase
  */
 
-public class AndroidCouchbaseCallback extends DroidGap
+public class Tangerine extends DroidGap
 {
-    public static final String TAG = AndroidCouchbaseCallback.class.getName();
+    public static final String TAG = Tangerine.class.getName();
     public static final String COUCHBASE_DATABASE_SUFFIX = ".couch";
     public static final String DEFAULT_ATTACHMENT = "/index.html";
     private CouchbaseMobile couchbaseMobile;
@@ -146,10 +146,10 @@ public class AndroidCouchbaseCallback extends DroidGap
             cancelLoadUrl();
 
             if(couchappDatabase != null) {
-                AndroidCouchbaseCallback.this.loadUrl(getCouchAppURL(host, port));
+                Tangerine.this.loadUrl(getCouchAppURL(host, port));
             }
 
-            AndroidCouchbaseCallback.this.couchbaseStarted(host, port);
+            Tangerine.this.couchbaseStarted(host, port);
         }
 
         @Override
