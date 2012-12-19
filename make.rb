@@ -105,7 +105,8 @@ end
 #
 section "Preparing couch" do
 
-  File.open("#{relative_to_app}_docs/TangerineSettingsDefault.json", "r+") { |file|
+  # reverted to "server" after push
+  File.open("#{relative_to_app}_docs/Config.json", "r+") { |file|
     newText = file.read.sub(/\"context(.*)\"/, "\"context\" : \"#{context}\"")
     file.seek(0)
     file.truncate(0)
@@ -126,6 +127,13 @@ section "Preparing couch" do
   bite_tongue do
     check_step `cd #{relative_to_app}; couchapp push; cd -`, "push with Couchapp"
   end
+
+  File.open("#{relative_to_app}_docs/Config.json", "r+") { |file|
+    newText = file.read.sub(/\"context(.*)\"/, "\"context\" : \"server\"")
+    file.seek(0)
+    file.truncate(0)
+    file.write newText
+  }
 
   check_step RestClient.post("http://tangerine:tangytangerine@localhost:5984/tangerine/_compact", "", :content_type => 'application/json'), "compact database"
 
