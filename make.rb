@@ -106,7 +106,7 @@ end
 section "Preparing couch" do
 
   # reverted to "server" after push
-  File.open("#{relative_to_app}_docs/Config.json", "r+") { |file|
+  File.open("#{relative_to_app}_docs/configuration.json", "r+") { |file|
     newText = file.read.sub(/\"context(.*)\"/, "\"context\" : \"#{context}\"")
     file.seek(0)
     file.truncate(0)
@@ -128,7 +128,7 @@ section "Preparing couch" do
     check_step `cd #{relative_to_app}; couchapp push; cd -`, "push with Couchapp"
   end
 
-  File.open("#{relative_to_app}_docs/Config.json", "r+") { |file|
+  File.open("#{relative_to_app}_docs/configuration.json", "r+") { |file|
     newText = file.read.sub(/\"context(.*)\"/, "\"context\" : \"server\"")
     file.seek(0)
     file.truncate(0)
