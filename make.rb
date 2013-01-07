@@ -113,7 +113,7 @@ section "Preparing couch" do
     file.write newText
   }
 
-  if $options[:new_database]
+  if $options[:fresh]
 
     begin
       check_step RestClient.delete("http://tangerine:tangytangerine@localhost:5984/tangerine"), "delete database"
@@ -182,8 +182,12 @@ bite_tongue do
   end
 
   section "Installing" do
-    check_step `adb uninstall org.rti.tangerineclass`, "uninstall old APK"
-    check_step `adb install bin/Tangerine-debug.apk`, "install new APK"
+    if $options[:make_class]
+      check_step `adb uninstall org.rti.tangerineclass`, "uninstall old APK"
+    elsif $options[:make_mobile]
+      check_step `adb uninstall org.rti.tangerine`,      "uninstall old APK"
+    end
+    check_step `adb install bin/Tangerine-debug.apk`,  "install new APK"
   end
 
   # Save backup
