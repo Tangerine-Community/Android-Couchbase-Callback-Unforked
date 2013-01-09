@@ -196,4 +196,8 @@ bite_tongue do
 end
 
 puts "\nAll done. Enjoy your #{if $options[:fresh] then "fresh " else "" end}Tangerine.\n\n"
-
+if $options[:make_mobile]
+  `adb shell am start -n org.rti.tangerine/org.rti.tangerine.Tangerine`
+elsif $options[:make_class]
+  `adb shell am start -n org.rti.tangerineclass/org.rti.tangerineclass.Tangerine`
+end
