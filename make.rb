@@ -128,12 +128,12 @@ section "Preparing couch" do
     check_step `cd #{relative_to_app}; couchapp push; cd -`, "push with Couchapp"
   end
 
-  File.open("#{relative_to_app}_docs/configuration.json", "r+") { |file|
-    newText = file.read.sub(/\"context(.*)\"/, "\"context\" : \"server\"")
-    file.seek(0)
-    file.truncate(0)
-    file.write newText
-  }
+  #File.open("#{relative_to_app}_docs/configuration.json", "r+") { |file|
+  #  newText = file.read.sub(/\"context(.*)\"/, "\"context\" : \"server\"")
+  #  file.seek(0)
+  #  file.truncate(0)
+  #  file.write newText
+  #}
 
   check_step RestClient.post("http://tangerine:tangytangerine@localhost:5984/tangerine/_compact", "", :content_type => 'application/json'), "compact database"
 
