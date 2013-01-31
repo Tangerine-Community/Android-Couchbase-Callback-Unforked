@@ -120,3 +120,4 @@ Portions under Apache, Erlang, and other licenses.
 The overall package is released under the Apache license, 2.0.
 
 Copyright 2011-2012, Couchbase, Inc.
+=======
